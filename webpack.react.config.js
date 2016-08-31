@@ -5,7 +5,7 @@ var htmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 module.exports = {
     entry: {//打包的入口文件 String|Object
-        build: "./react/index.js"    //键：打包后生成的文件名  值:需要打包的文件
+        build: "./react/life/index.js"    //键：打包后生成的文件名  值:需要打包的文件
     },
     output: {//配置打包结果 Object
         path: "./react_build/",//定义输出文件路径

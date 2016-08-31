@@ -6,6 +6,6 @@ import ReactDOM from 'react-dom'
 
 export default class App extends React.Component{
     render(){
-        return <h1>Hello!!!!我艹，这就是传说中的react热加载，这尼玛也太神奇了吧</h1>
+        return <h1>Hello!!!!</h1>
     }
 }
