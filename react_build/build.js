@@ -72,7 +72,44 @@
 	            name: 'Zhou'
 	        };
 	    },
+
+	    //即将加载
+	    componentWillMount: function componentWillMount() {
+	        console.log('component will mount');
+	        this.state.name = 'Zhe';
+	    },
+
+	    //加载完成   这个阶段可以和外部框架或者外部库结合一起用，操作DOM对象
+	    componentDidMount: function componentDidMount() {
+	        console.log('component did mount');
+	        var dom = _reactDom2.default.findDOMNode(this);
+	        console.log(dom);
+
+	        var isYellow = false;
+
+	        setInterval(function () {
+	            if (isYellow) {
+	                dom.style.background = 'red';
+	                isYellow = false;
+	            } else {
+	                dom.style.background = 'yellow';
+	                isYellow = true;
+	            }
+	        }, 1000);
+	    },
+
+	    //即将更新
+	    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	        console.log('component will update');
+	    },
+
+
+	    //更新完成
+	    componentDidUpdate: function componentDidUpdate(oldProps, oldState) {
+	        console.log('component did update');
+	    },
 	    render: function render() {
+	        console.log('render');
 	        return _react2.default.createElement(
 	            'h1',
 	            null,
@@ -81,7 +118,20 @@
 	    }
 	});
 
-	_reactDom2.default.render(_react2.default.createElement(Item, null), _react2.default.createElement(Item, null), _react2.default.createElement(Item, null), document.body);
+	var div1 = document.createElement('div');
+	document.body.appendChild(div1);
+	_reactDom2.default.render(_react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(Item, null)
+	), div1);
+
+	/*
+	    调用了1次getDefaultProps    3次getInitialState
+
+	    componentWillMount    componentDidMount   都只调用一次
+
+	*/
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\project\\learn\\react\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
