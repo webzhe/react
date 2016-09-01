@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\project\\learn\\react\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\project\\learn\\react\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("C:\\Users\\ZhouZhe\\Desktop\\githubNote\\reactNote\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("C:\\Users\\ZhouZhe\\Desktop\\githubNote\\reactNote\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	'use strict';
 
@@ -69,7 +69,8 @@
 	    getInitialState: function getInitialState() {
 	        console.log('get initial state');
 	        return {
-	            name: 'Zhou'
+	            name: 'Zhou',
+	            isRed: false
 	        };
 	    },
 
@@ -87,7 +88,7 @@
 
 	        var isYellow = false;
 
-	        setInterval(function () {
+	        this.state.loopNum = setInterval(function () {
 	            if (isYellow) {
 	                dom.style.background = 'red';
 	                isYellow = false;
@@ -97,6 +98,16 @@
 	            }
 	        }, 1000);
 	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        // state
+	        console.log('component will receive props');
+	    },
+	    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+	        console.log('should component update');
+	        return true;
+	        //根据这个真假 是否调用 componentWillUpdate 和 componentDidUpdate
+	    },
+
 
 	    //即将更新
 	    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
@@ -108,32 +119,84 @@
 	    componentDidUpdate: function componentDidUpdate(oldProps, oldState) {
 	        console.log('component did update');
 	    },
+	    update: function update() {
+	        if (this.state.isRed) {
+	            this.setState({ name: 'Lei' });
+	            this.setState({ isRed: false });
+	        } else {
+	            this.setState({ name: 'Zhou1' });
+	            this.setState({ isRed: true });
+	        }
+
+	        // this.forceUpdate();//强制刷新
+	    },
 	    render: function render() {
 	        console.log('render');
 	        return _react2.default.createElement(
 	            'h1',
 	            null,
-	            this.props.group + this.state.name
+	            this.props.group + this.state.name,
+	            _react2.default.createElement(
+	                'button',
+	                { onClick: this.update },
+	                '更新'
+	            )
 	        );
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        console.log('component will unmount');
+	        clearInterval(this.state.loopNum);
 	    }
 	});
 
 	var div1 = document.createElement('div');
+	var clear = document.createElement('button');
+	var add = document.createElement('button');
+	add.innerHTML = 'add';
+	clear.innerHTML = 'clear';
 	document.body.appendChild(div1);
-	_reactDom2.default.render(_react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(Item, null)
-	), div1);
-
+	document.body.appendChild(clear);
+	document.body.appendChild(add);
+	function render(bool) {
+	    _reactDom2.default.render(_react2.default.createElement(
+	        'div',
+	        null,
+	        bool ? _react2.default.createElement(Item, null) : ""
+	    ), div1);
+	}
+	// const List = React.createClass({
+	//     render(){
+	//         return <div>
+	//             <Item />
+	//         </div>
+	//     }
+	// });
+	render(true);
+	clear.onclick = function () {
+	    render(false);
+	};
+	add.onclick = function () {
+	    render(true);
+	};
+	// render();
 	/*
 	    调用了1次getDefaultProps    3次getInitialState
 
 	    componentWillMount    componentDidMount   都只调用一次
 
+	    刷新3种情况
+	        1、外部调用
+	        2、更新setState
+	        3、调用forceUpdate() 强制刷新
+
+	    强制刷新不会执行shouldComponentUpdate()  这个方法
+	    而内部setState 会根据 shouldComponentUpdate() 返回的真假是否执行
+	    外部调用render() 也会根据shouldComponentUpdate() 返回的真假是否执行
+
+	    componentWillReceiveProps  只针对外部调用render()才会执行
 	*/
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\project\\learn\\react\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\ZhouZhe\\Desktop\\githubNote\\reactNote\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 1 */
@@ -254,40 +317,25 @@
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
 	(function () {
 	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
+	        cachedSetTimeout = setTimeout;
 	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
+	        cachedSetTimeout = function () {
+	            throw new Error('setTimeout is not defined');
+	        }
 	    }
 	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
+	        cachedClearTimeout = clearTimeout;
 	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
+	        cachedClearTimeout = function () {
+	            throw new Error('clearTimeout is not defined');
+	        }
 	    }
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
 	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
 	        return setTimeout(fun, 0);
 	    }
 	    try {
@@ -308,11 +356,6 @@
 	function runClearTimeout(marker) {
 	    if (cachedClearTimeout === clearTimeout) {
 	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
 	        return clearTimeout(marker);
 	    }
 	    try {

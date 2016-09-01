@@ -36,5 +36,5 @@
 ```
 ### unmount(卸载阶段)
 ```
-    will
+    componentWillUnount
 ```
