@@ -1,7 +1,10 @@
 import React from 'react'
 import Store from './Store'
+import Actions from './Actions'
 
-const store = new Store();
+const actions = new Actions();
+const store = new Store(actions);
+
 
 //Top level Component , container and controller-view
 class List extends React.Component{
@@ -14,7 +17,12 @@ class List extends React.Component{
 
     add(){
         //伪代码
-        store._add(this.refs.nameInput.value);
+        // store._add(this.refs.nameInput.value);
+        actions.add(this.refs.nameInput.value);
+    }
+
+    del(){
+        actions.del();
     }
 
     componentDidMount(){

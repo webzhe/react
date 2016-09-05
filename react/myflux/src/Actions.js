@@ -1,11 +1,27 @@
-const Store = Symbol('store');
+const EventEmitter = require('events').EventEmitter;
 
-export class Actions default {
-    constructor(_store){
-        this[store] = _store;
+class Actions extends EventEmitter{
+    constructor(){
+        super();
     }
 
     add(name){
-        this[store]._add(name);
+        var action = {
+            actionType: "add",
+            name
+        };
+
+        this.emit('create',action);
+    }
+
+    del(id){
+        var action = {
+            actionType: "del",
+            id
+        };
+
+        this.emit('call',action);
     }
 }
+
+export default Actions

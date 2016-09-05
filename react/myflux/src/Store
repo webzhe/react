@@ -1,7 +1,17 @@
 const EventEmitter = require('events').EventEmitter;
 
 class Store extends EventEmitter {
-    constructor(){
+    constructor(actions){
+        actions.on('create',action => {
+            switch(action.actionType){
+                case 'add':
+                    this._add(action.name);
+                    break;
+                case 'del':
+                    this._del(action.id);
+                    break;
+            }
+        });
         super();
         this._list = [];
     }
@@ -9,6 +19,10 @@ class Store extends EventEmitter {
     _add(item){
         this._list.push(item);
         this.emit("change",this._list);//触发change事件
+    }
+
+    _del(id){
+        this.emit("change",this._list);
     }
 
     get(){
