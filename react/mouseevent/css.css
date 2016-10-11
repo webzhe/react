@@ -1,0 +1,13 @@
+#leftsection{
+    float:left;
+    width:200px;
+    height:200px;
+    background:beige;
+}
+
+#rightsection{
+    float:left;
+    width:200px;
+    height:200px;
+    background:yellow;
+}
