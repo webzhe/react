@@ -38,13 +38,24 @@ let actions = {
 
 
 //----------------------------------------------------------------------------------
+
+let Opt = React.createClass({
+    render(){
+        return <div>
+            <input onChange={event => this.props.changeName(event.target.value)} />
+            <button onClick={event => this.props.access()}>access</button>
+        </div>
+    }
+});
+
+Opt = connect(null,actions)(Opt);
+
 let UI = React.createClass({
     render(){
         return <div>
             <p>{this.props.name}</p>
             <p>{this.props.num}</p>
-            <input onChange={event => this.props.changeName(event.target.value)} />
-            <button onClick={event => this.props.access()}>access</button>
+            <Opt />
         </div>
     }
 });
@@ -62,7 +73,7 @@ function getState(state,prop){
 //     return actions;
 // }
 
-UI = connect(getState,actions)(UI);
+UI = connect(getState)(UI);
 
 var div = document.createElement('div');
 document.body.appendChild(div);
